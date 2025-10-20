@@ -14,14 +14,16 @@ namespace Grocery.Core.Data.Repositories
                             [Id] INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                             [GroceryListId] INTEGER NOT NULL,
                             [ProductId] INTEGER NOT NULL,
-                            [Amount] INTEGER NOT NULL)");
-            List<string> queries = [@"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(1, 1, 3)",
+                            [Amount] INTEGER NOT NULL,
+                            FOREIGN KEY(GroceryListId) REFERENCES GroceryList(Id))");
+            if (GetAll().Count == 0) {
+                List<string> queries = [@"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(1, 1, 3)",
                                           @"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(1, 2, 1)",
                                           @"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(1, 3, 4)",
                                           @"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(2, 1, 2)",
                                           @"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(2, 2, 5)"];
-            InsertMultipleWithTransaction(queries);
-            GetAll();
+                InsertMultipleWithTransaction(queries);
+            }
         }
 
         public List<GroceryListItem> GetAll()
