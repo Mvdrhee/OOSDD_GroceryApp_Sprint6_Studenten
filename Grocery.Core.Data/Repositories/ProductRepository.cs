@@ -15,10 +15,10 @@ namespace Grocery.Core.Data.Repositories
                             [Stock] INTEGER NOT NULL,
                             [Shelflife] DATE NOT NULL,
                             [Price] DECIMAL NOT NULL)");
-            List<string> insertQueries = [@"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Melk', 300, 2025-9-25, 0.95)",
-                                          @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Kaas', 100, 2025-9-30, 7.98)",
-                                          @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Brood', 400, 2025-9-12, 2.19)",
-                                          @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Cornflakes', 0, 2025-12-31, 1.48)"];
+            List<string> insertQueries = [@"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Melk', 300, '2025-9-25', 0.95)",
+                                          @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Kaas', 100, '2025-9-30', 7.98)",
+                                          @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Brood', 400, '2025-9-12', 2.19)",
+                                          @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES('Cornflakes', 0, '2025-12-31', 1.48)"];
             InsertMultipleWithTransaction(insertQueries);
         }
         public List<Product> GetAll()
@@ -36,7 +36,7 @@ namespace Grocery.Core.Data.Repositories
                     string name = reader.GetString(1);
                     int stock = reader.GetInt32(2);
                     DateOnly shelflife = DateOnly.FromDateTime(reader.GetDateTime(3));
-                    int price = reader.GetInt32(4);
+                    Decimal price = reader.GetDecimal(4);
                     products.Add(new(id, name, stock, shelflife, price));
                 }
             }
@@ -58,7 +58,7 @@ namespace Grocery.Core.Data.Repositories
                     string name = reader.GetString(1);
                     int stock = reader.GetInt32(2);
                     DateOnly shelflife = DateOnly.FromDateTime(reader.GetDateTime(3));
-                    int price = reader.GetInt32(4);
+                    Decimal price = reader.GetDecimal(4);
                     product = (new(id, name, stock, shelflife, price));
                 }
             }
