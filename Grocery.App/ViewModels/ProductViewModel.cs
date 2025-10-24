@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Grocery.App.ViewModels
 {
-    public class ProductViewModel : BaseViewModel
+    public partial class ProductViewModel : BaseViewModel
     {
         private readonly IProductService _productService;
         public ObservableCollection<Product> Products { get; set; }

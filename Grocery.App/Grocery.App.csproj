@@ -78,16 +78,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Remove="Views\NewProductView.xaml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Include="Views\NewProductView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiAsset Include="appsettings.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiAsset>
@@ -126,6 +116,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\NewProductView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\ProductCategoriesView.xaml">
