@@ -94,10 +94,10 @@ namespace Grocery.Core.Data.Repositories
             OpenConnection();
             using (SqliteCommand command = new(updateQuery, Connection))
             {
-                command.Parameters.AddWithValue("Name", item.Name);
-                command.Parameters.AddWithValue("Stock", item.Stock);
-                command.Parameters.AddWithValue("ShelfLife", item.ShelfLife);
-                command.Parameters.AddWithValue("Price", item.Price);
+                command.Parameters.AddWithValue("@Name", item.Name);
+                command.Parameters.AddWithValue("@Stock", item.Stock);
+                command.Parameters.AddWithValue("@ShelfLife", item.ShelfLife);
+                command.Parameters.AddWithValue("@Price", item.Price);
 
                 recordsAffected = command.ExecuteNonQuery();
             }
