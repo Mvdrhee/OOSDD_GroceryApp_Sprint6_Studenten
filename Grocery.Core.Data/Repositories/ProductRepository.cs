@@ -68,14 +68,14 @@ namespace Grocery.Core.Data.Repositories
 
         public Product Add(Product item)
         {
-            string insertQuery = $"INSERT INTO Product(Name, Stock, Shelflife, Price) VALUES(@Name, @Stock, @Shelflife, @Price) Returning RowId;";
+            string insertQuery = @"INSERT INTO Product(Name, Stock, Shelflife, Price) VALUES(@Name, @Stock, @ShelfLife, @Price) Returning RowId;";
             OpenConnection();
             using (SqliteCommand command = new(insertQuery, Connection))
             {
-                command.Parameters.AddWithValue("Name", item.Name);
-                command.Parameters.AddWithValue("Stock", item.Stock);
-                command.Parameters.AddWithValue("ShelfLife", item.ShelfLife);
-                command.Parameters.AddWithValue("Price", item.Price);
+                command.Parameters.AddWithValue("@Name", item.Name);
+                command.Parameters.AddWithValue("@Stock", item.Stock);
+                command.Parameters.AddWithValue("@ShelfLife", item.ShelfLife);
+                command.Parameters.AddWithValue("@Price", item.Price);
                 item.Id = Convert.ToInt32(command.ExecuteScalar());
             }
             CloseConnection();
@@ -90,7 +90,7 @@ namespace Grocery.Core.Data.Repositories
         public Product? Update(Product item)
         {
             int recordsAffected;
-            string updateQuery = $"UPDATE Product SET Name = @Name, Stock = @Stock, Shelflife = @Shelflife, Price = @Price WHERE Id = {item.Id};";
+            string updateQuery = $@"UPDATE Product SET Name = @Name, Stock = @Stock, Shelflife = @ShelfLife, Price = @Price WHERE Id = {item.Id};";
             OpenConnection();
             using (SqliteCommand command = new(updateQuery, Connection))
             {
