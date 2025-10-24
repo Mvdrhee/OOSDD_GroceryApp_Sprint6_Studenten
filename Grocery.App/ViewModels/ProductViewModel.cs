@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Grocery.Core.Interfaces.Services;
+using Grocery.App.Views;
 using Grocery.Core.Models;
 using System.Collections.ObjectModel;
 
@@ -19,7 +20,7 @@ namespace Grocery.App.ViewModels
         [RelayCommand]
         public async Task AddProduct()
         {
-            await Shell.Current.GoToAsync(nameof(NewProductViewModel));
+            await Shell.Current.GoToAsync(nameof(NewProductView), true);
         }
     }
 }
