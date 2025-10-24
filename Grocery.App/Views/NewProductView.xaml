@@ -11,4 +11,12 @@
             <Label Text="Product Toevoegen" FontSize="Large" HorizontalOptions="Center" VerticalOptions="Center" />
         </Grid>
     </Shell.TitleView>
+	<StackLayout Padding="20" VerticalOptions="Center">
+		<Entry Placeholder="Productnaam" Text="{Binding InputName}" />
+		<Entry Placeholder="Voorraad" Text="{Binding InputStock}" Keyboard="Numeric" />
+		<Entry Placeholder="Prijs" Text="{Binding InputPrice}" Keyboard="Numeric" />
+		<Entry Placeholder="Houdbaarheidsdatum" Text="{Binding InputDate}" />
+		<Button Text="Voeg toe" Command="{Binding AddProductCommand}" />
+		<Label Text="{Binding ErrorMessage}" TextColor="Red" />
+	</StackLayout>
 </ContentPage>
