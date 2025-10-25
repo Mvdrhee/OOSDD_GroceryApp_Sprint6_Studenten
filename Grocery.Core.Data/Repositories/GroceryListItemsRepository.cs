@@ -15,7 +15,8 @@ namespace Grocery.Core.Data.Repositories
                             [GroceryListId] INTEGER NOT NULL,
                             [ProductId] INTEGER NOT NULL,
                             [Amount] INTEGER NOT NULL,
-                            FOREIGN KEY(GroceryListId) REFERENCES GroceryList(Id))");
+                            FOREIGN KEY(GroceryListId) REFERENCES GroceryList(Id)),
+                            FOREIGN KEY(ProductId) REFERENCES Product(Id))");
             if (GetAll().Count == 0) {
                 List<string> queries = [@"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(1, 1, 3)",
                                           @"INSERT OR IGNORE INTO GroceryListItem(GroceryListId, ProductId, Amount) VALUES(1, 2, 1)",
