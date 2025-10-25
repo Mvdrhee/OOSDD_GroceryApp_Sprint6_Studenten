@@ -8,7 +8,7 @@ namespace Grocery.Core.Interfaces.Repositories
 
         public Product? Get(int id);
 
-        public Product Add(Product item);
+        public Product? Add(Product item);
 
         public Product? Delete(Product item);
 

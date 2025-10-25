@@ -66,9 +66,10 @@ namespace Grocery.Core.Data.Repositories
             return product;
         }
 
-        public Product Add(Product item)
+        public Product? Add(Product item)
         {
-            string insertQuery = @"INSERT INTO Product(Name, Stock, Shelflife, Price) VALUES(@Name, @Stock, @ShelfLife, @Price) Returning RowId;";
+            int? id;
+            string insertQuery = @"INSERT OR IGNORE INTO Product(Name, Stock, Shelflife, Price) VALUES(@Name, @Stock, @ShelfLife, @Price) Returning RowId;";
             OpenConnection();
             using (SqliteCommand command = new(insertQuery, Connection))
             {
@@ -76,10 +77,11 @@ namespace Grocery.Core.Data.Repositories
                 command.Parameters.AddWithValue("@Stock", item.Stock);
                 command.Parameters.AddWithValue("@ShelfLife", item.ShelfLife);
                 command.Parameters.AddWithValue("@Price", item.Price);
-                item.Id = Convert.ToInt32(command.ExecuteScalar());
+                id = Convert.ToInt32(command.ExecuteScalar());
             }
             CloseConnection();
-            return item;
+            if (id == 0) { return null; }
+            else { return item; }
         }
 
         public Product? Delete(Product item)

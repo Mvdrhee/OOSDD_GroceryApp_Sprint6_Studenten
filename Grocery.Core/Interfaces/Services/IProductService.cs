@@ -6,7 +6,7 @@ namespace Grocery.Core.Interfaces.Services
     {
         public List<Product> GetAll();
 
-        public Product Add(Product item);
+        public Product? Add(Product item);
 
         public Product? Delete(Product item);
 

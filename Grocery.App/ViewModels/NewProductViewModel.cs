@@ -40,19 +40,15 @@ namespace Grocery.App.ViewModels
         [RelayCommand]
         private void AddProduct()
         {
-            if (Client.Role != Role.Admin) {return; }
+            if (Client.Role != Role.Admin) { return; }
             Product? new_product = null;
-            try
-                { new_product = new(0, InputName, Int32.Parse(InputStock), DateOnly.Parse(InputDate), Int32.Parse(InputPrice)); }
-            catch (Exception)
-            {
-                ErrorMessage = "Ongeldige invoer";
-                return;
-            }
+            try { new_product = new(0, InputName, Int32.Parse(InputStock), DateOnly.Parse(InputDate), Int32.Parse(InputPrice)); }
+            catch (Exception) { ErrorMessage = "Kan invoer niet verwerken. Controleer of u geen typfout heeft gemaakt"; }
+            if (new_product == null) { return; }
 
-            _productsService.Add(new_product);
-            Products.Add(new_product);
-
-            }
+            new_product = _productsService.Add(new_product);
+            if (new_product != null) {Products.Add(new_product); }
+            else { ErrorMessage = "Dit product bestaat al"; }
+        }
     }
 }
